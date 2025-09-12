@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: arzonPochta
+  jpa:
+    show-sql: true
+    open-in-view: false
+  flyway:
+    enabled: true
+    locations: classpath:migration
+    baseline-on-migrate: true
+
+server:
+    port: 7071

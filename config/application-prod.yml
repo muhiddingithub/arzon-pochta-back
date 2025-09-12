@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: ${PG_USERNAME:-}
+    password: ${PG_PASSWORD:-}
+    url: jdbc:postgresql://${PG_HOST:localhost}:${PG_PORT:5432}/${PG_DATABASE:-}
+    hikari:
+      pool-name: pool-${spring.application.name}
+      maximum-pool-size: 20          # Total connections in pool
+      minimum-idle: 5                # Keep some idle connections ready
+      idle-timeout: 600000           # 10 min before closing idle connections
+      max-lifetime: 1800000          # 30 min connection lifetime (must be < DB timeout)
+      connection-timeout: 30000      # Wait max 30s for a connection
+      leak-detection-threshold: 20000 # Log warning if connection held > 20s
+      auto-commit: true
+      keepalive-time: 300000        # Ping DB every 5 min to avoid idle disconnects
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
